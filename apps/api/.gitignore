@@ -1,0 +1,11 @@
+node_modules/
+.vscode
+.idea/
+dist
+error.log
+yarn-error.log
+tmp
+errors
+bak
+.DS_Store
+nodemon.json

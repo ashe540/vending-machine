@@ -1,0 +1,40 @@
+
+<div class="row">
+  <div class="col-md-9">
+    <h1>Deposit</h1>
+  </div>
+  <div class="col-md-3">
+    <button class="btn btn-danger" (click)="resetBalance()">Reset balance</button>
+  </div>
+</div>
+
+<p>Feel free to deposit as many funds as needed into your account. Yes, we love free money as much as the next guy. The
+  only limitation is that you we only accept 5, 10, 20, 50 and 100 cent coins. </p>
+
+<div class="alert alert-primary">
+  Enter the amount in cents that you wish to deposit!
+</div>
+
+<hr>
+
+
+<ng-container *ngIf="depositAmount !== undefined; else loader">
+  <h4>Available balance: {{ (depositAmount! / 100) | currency:'EUR':'symbol': '1.2-2' }} </h4>
+</ng-container>
+
+
+<form [formGroup]="depositForm">
+  <div class="col-md-3">
+    <div class="form-group">
+      <input type="number" class="form-control" formControlName="amount" placeholder="Enter amount to deposit">
+    </div>
+  </div>
+  <div class="col-md-3">
+    <button class="btn btn-default" (click)="deposit()">Deposit</button>
+  </div>
+</form>
+
+
+<ng-template #loader>
+  <vending-machine-loader></vending-machine-loader>
+</ng-template>

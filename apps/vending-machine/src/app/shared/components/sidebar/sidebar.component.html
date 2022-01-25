@@ -1,0 +1,33 @@
+<div class="sidebar sidebar-hide-to-small sidebar-shrink sidebar-gestures">
+  <div class="nano">
+    <div class="nano-content">
+      <ul>
+        <div class="logo"><a href="javascript:;" routerLink="/">
+            <span>Vending Machine</span>
+          </a></div>
+        <li class="label">Main</li>
+
+
+        <!-- Only available to buyer -->
+        <ng-container *ngIf="userRole === 'buyer'">
+          <li><a href="javascript:;" routerLink="/app/shop"><i class="ti-shopping-cart"></i>
+              Shop</a>
+          </li>
+          <li><a href="javascript:;" routerLink="/app/shop/deposit"><i class="ti-credit-card"></i>
+              Deposit</a></li>
+
+          <li><a href="javascript:;" routerLink="/app/shop/purchases"><i class="ti-receipt"></i>
+              Purchase History</a></li>
+
+        </ng-container>
+
+        <!-- Only available to sellers -->
+        <li *ngIf="userRole === 'seller'"><a href="javascript:;" routerLink="/app/management"><i
+              class="ti-layout-grid2"></i> Manage
+            Products</a></li>
+
+        <li><a (click)="logout()"><i class="ti-close"></i> Logout</a></li>
+      </ul>
+    </div>
+  </div>
+</div>

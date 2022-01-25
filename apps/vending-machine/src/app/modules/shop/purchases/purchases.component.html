@@ -1,0 +1,40 @@
+<div class="purchases-wrapper">
+  <div class="table-responsive" *ngIf="purchases; else loader">
+    <table class="table table-hover" *ngIf="purchases.length; else noPurchases">
+      <thead>
+        <tr>
+          <td>#</td>
+          <th>Order ID</th>
+          <th>Order Date</th>
+          <th>Products</th>
+          <th>Price</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let purchase of purchases; let i=index">
+          <td>{{ i + 1 }}</td>
+          <td>{{ purchase._id }}</td>
+          <td>{{ purchase.timestamp | date :'short'}}</td>
+          <td>
+
+            <ng-container *ngFor="let product of purchase.products">
+              <p>{{ product.quantity}}x {{ product.productName }} ({{product.cost | currency:
+                'EUR':'symbol':'1.2-2'}})
+              </p><br>
+            </ng-container>
+
+          </td>
+          <td>{{ purchase.total | currency:'EUR':'symbol':'1.2-2' }}</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>
+
+<ng-template #noPurchases>
+  <p>No purchases have been made yet!</p>
+</ng-template>
+
+<ng-template #loader>
+  <vending-machine-loader></vending-machine-loader>
+</ng-template>

@@ -1,0 +1,117 @@
+{
+  "projectType": "application",
+  "root": "apps/vending-machine",
+  "sourceRoot": "apps/vending-machine/src",
+  "prefix": "vending-machine",
+  "targets": {
+    "build": {
+      "executor": "@angular-devkit/build-angular:browser",
+      "outputs": ["{options.outputPath}"],
+      "options": {
+        "outputPath": "dist/apps/vending-machine",
+        "index": "apps/vending-machine/src/index.html",
+        "main": "apps/vending-machine/src/main.ts",
+        "polyfills": "apps/vending-machine/src/polyfills.ts",
+        "tsConfig": "apps/vending-machine/tsconfig.app.json",
+        "inlineStyleLanguage": "scss",
+        "assets": [
+          "apps/vending-machine/src/favicon.ico",
+          "apps/vending-machine/src/assets"
+        ],
+        "styles": [
+          "apps/vending-machine/src/styles.scss",
+          "apps/vending-machine/src/assets/css/lib/font-awesome.min.css",
+          "apps/vending-machine/src/assets/css/lib/themify-icons.css",
+          "apps/vending-machine/src/assets/css/lib/menubar/sidebar.css",
+          "apps/vending-machine/src/assets/css/lib/bootstrap.min.css",
+          "apps/vending-machine/src/assets/css/lib/helper.css",
+          "apps/vending-machine/src/assets/css/style.css",
+          "./node_modules/ngx-toastr/toastr.css"
+        ],
+        "scripts": [
+          "apps/vending-machine/src/assets/js/lib/jquery.min.js",
+          "apps/vending-machine/src/assets/js/lib/jquery.nanoscroller.min.js",
+          "apps/vending-machine/src/assets/js/lib/menubar/sidebar.js",
+          "apps/vending-machine/src/assets/js/lib/preloader/pace.min.js",
+          "apps/vending-machine/src/assets/js/lib/bootstrap.min.js",
+          "apps/vending-machine/src/assets/js/scripts.js",
+          "apps/vending-machine/src/assets/js/lib/circle-progress/circle-progress.min.js",
+          "apps/vending-machine/src/assets/js/lib/circle-progress/circle-progress-init.js",
+          "apps/vending-machine/src/assets/js/lib/owl-carousel/owl.carousel.min.js",
+          "apps/vending-machine/src/assets/js/lib/owl-carousel/owl.carousel-init.js"
+        ]
+      },
+      "configurations": {
+        "production": {
+          "budgets": [
+            {
+              "type": "initial",
+              "maximumWarning": "500kb",
+              "maximumError": "1mb"
+            },
+            {
+              "type": "anyComponentStyle",
+              "maximumWarning": "2kb",
+              "maximumError": "4kb"
+            }
+          ],
+          "fileReplacements": [
+            {
+              "replace": "apps/vending-machine/src/environments/environment.ts",
+              "with": "apps/vending-machine/src/environments/environment.prod.ts"
+            }
+          ],
+          "outputHashing": "all"
+        },
+        "development": {
+          "buildOptimizer": false,
+          "optimization": false,
+          "vendorChunk": true,
+          "extractLicenses": false,
+          "sourceMap": true,
+          "namedChunks": true
+        }
+      },
+      "defaultConfiguration": "production"
+    },
+    "serve": {
+      "executor": "@angular-devkit/build-angular:dev-server",
+      "configurations": {
+        "production": {
+          "browserTarget": "vending-machine:build:production"
+        },
+        "development": {
+          "browserTarget": "vending-machine:build:development"
+        }
+      },
+      "defaultConfiguration": "development",
+      "options": {
+        "proxyConfig": "apps/vending-machine/proxy.conf.json"
+      }
+    },
+    "extract-i18n": {
+      "executor": "@angular-devkit/build-angular:extract-i18n",
+      "options": {
+        "browserTarget": "vending-machine:build"
+      }
+    },
+    "lint": {
+      "executor": "@nrwl/linter:eslint",
+      "options": {
+        "lintFilePatterns": [
+          "apps/vending-machine/src/**/*.ts",
+          "apps/vending-machine/src/**/*.html"
+        ]
+      }
+    },
+    "test": {
+      "executor": "@nrwl/jest:jest",
+      "outputs": ["coverage/apps/vending-machine"],
+      "options": {
+        "jestConfig": "apps/vending-machine/jest.config.js",
+        "passWithNoTests": true
+      }
+    }
+  },
+  "tags": []
+}

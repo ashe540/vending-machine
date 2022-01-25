@@ -1,0 +1,9 @@
+{
+  "version": 2,
+  "projects": {
+    "api": "apps/api",
+    "api-interfaces": "libs/api-interfaces",
+    "vending-machine": "apps/vending-machine",
+    "vending-machine-e2e": "apps/vending-machine-e2e"
+  }
+}

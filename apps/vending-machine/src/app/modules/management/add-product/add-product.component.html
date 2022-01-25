@@ -1,0 +1,15 @@
+<form [formGroup]="addProductForm">
+  <div class="form-group">
+    <label>Name</label>
+    <input type="text" class="form-control" formControlName="name" placeholder="Name">
+  </div>
+  <div class="form-group">
+    <label>Cost</label>
+    <input type="number" class="form-control" formControlName="cost" placeholder="Price">
+  </div>
+  <div class="form-group">
+    <label>Amount available</label>
+    <input type="number" class="form-control" formControlName="amountAvailable" placeholder="Amount available">
+  </div>
+  <button type="submit" class="btn btn-primary btn-flat m-b-30 m-t-30" (click)="createProduct()">Create product</button>
+</form>

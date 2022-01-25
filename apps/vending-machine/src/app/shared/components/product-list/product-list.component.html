@@ -1,0 +1,37 @@
+<div class="table-responsive" *ngIf="products?.length; else loader">
+  <table class="table table-hover ">
+    <thead>
+      <tr>
+        <th>Name</th>
+        <th>Amount Available</th>
+        <th>Price</th>
+        <th *ngIf="showManagementButtons"></th>
+        <th *ngIf="showPurchaseButtons"></th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let product of products">
+        <td>{{ product.name }}</td>
+        <td>{{ product.amountAvailable }}</td>
+        <td>{{ product.cost | currency:'EUR':'symbol':'1.2-2' }}</td>
+        <td *ngIf="showManagementButtons">
+
+          <button type="button" class="btn btn-warning m-b-10 m-l-5"
+            (click)="handleEditProduct(product._id)">Edit</button>
+
+          <button type="button" class="btn btn-danger m-b-10 m-l-5"
+            (click)="handleDeleteProduct(product._id)">Delete</button>
+
+        </td>
+        <td *ngIf="showPurchaseButtons">
+          <button type="button" class="btn btn-success m-b-10 m-l-5" (click)="handlePurchaseProduct(product._id)">Buy
+            now</button>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+</div>
+
+<ng-template #loader>
+  <vending-machine-loader></vending-machine-loader>
+</ng-template>

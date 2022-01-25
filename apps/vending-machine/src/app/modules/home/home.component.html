@@ -1,0 +1,16 @@
+<div style="text-align: center">
+  <h1>Welcome {{ userRole }}!</h1>
+
+  <ng-container *ngIf="userRole === 'seller'">
+    <p>As a {{ userRole }} you are allowed to manage products, including adding updating and removing your products.</p>
+  </ng-container>
+
+  <ng-container *ngIf="userRole === 'buyer'">
+    <p>As a {{ userRole }} you can deposit funds and spend it on products.</p>
+  </ng-container>
+
+  <!-- <img width="450" src="https://raw.githubusercontent.com/nrwl/nx/master/images/nx-logo.png"
+    alt="Nx - Smart, Fast and Extensible Build System" /> -->
+
+  <p>To begin, select an option from the sidebar!</p>
+</div>

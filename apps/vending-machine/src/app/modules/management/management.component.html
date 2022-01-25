@@ -1,0 +1,11 @@
+<div class="options-bar">
+  <button type="button" class="btn btn-success btn-outline m-b-10 m-l-5" (click)="addProduct()">Add Product</button>
+</div>
+
+<vending-machine-product-list [products]="products" [showManagementButtons]="true" (editProduct)="editProduct($event)"
+  (deleteProduct)="deleteProduct($event)">
+</vending-machine-product-list>
+
+<swal #deleteProductModal title="Are you sure you want to delete this product?" icon="question"
+  [showCancelButton]="true" (confirm)="confirmDeletionProduct()" (cancel)="resetSelectedProduct()">
+</swal>
