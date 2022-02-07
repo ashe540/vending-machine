@@ -8,6 +8,6 @@ describe('vending-machine', () => {
     cy.login('my-email@something.com', 'myPassword');
 
     // Function helper example, see `../support/app.po.ts` file
-    getGreeting().contains('Welcome vending-machine');
+    getGreeting().contains('Welcome to Vending Machine app!');
   });
 });

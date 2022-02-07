@@ -83,7 +83,9 @@ app.use('/api/v1', routes);
 
 app.use(error);
 
-server.listen(port);
+if (process.env.NODE_ENV !== 'test') {
+  server.listen(port);
+}
 
 log.info(`⚡️ Running server on port ${port} in ${process.env.NODE_ENV} mode`);
 

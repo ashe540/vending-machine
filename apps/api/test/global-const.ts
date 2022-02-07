@@ -13,3 +13,7 @@ export const demoCreateProduct: ICreateEditProduct = {
   amountAvailable: 10,
   cost: 100,
 };
+
+export const SELLER_AUTH = 'seller';
+export const BUYER_AUTH = 'buyer';
+export const API_URL = '/api/v1';

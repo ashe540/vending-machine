@@ -1,31 +1,29 @@
+# Vending Machine
 
+A project (Angular + Node.js) that allows interacting with a vending machine. 
 
-# VendingMachine
-
-This project was generated using [Nx](https://nx.dev).
-
-<p style="text-align: center;"><img src="https://raw.githubusercontent.com/nrwl/nx/master/images/nx-logo.png" width="450"></p>
+<p style="text-align: center;"><img src="https://cdna.artstation.com/p/assets/images/images/030/203/116/4k/jonjo-hemmens-01-darker.jpg" ></p>
 
 ## Applications
 
-All applications are under the `apps` directory. This monorepo is made up of:
+This project was generated using [Nx](https://nx.dev). All applications are under the `apps` directory. This monorepo is made up of:
 
 - api: this is the backend Node.js (Typescript) API service. The API will be available on http://localhost:4000.
 - vending-machine: this the Angular frontend application. Navigate to http://localhost:4200/.
 
 ## Running the applications
 
-Run `nx serve my-app`, where `my-app` is the name of the application names as listed above. 
+Run `nx serve api` to run the TS Node.js/Express API server.
 
 Run `ng serve vending-machine` to start the frontend. Navigate to http://localhost:4200/. The app will automatically reload if you change any of the source files.
 
 ## Build
 
-Run `nx build my-app` to build the project. The build artifacts will be stored in the `dist/` directory. Use the `--prod` flag for a production build.
+Run `nx build my-app` to build the project, where `my-app` is the name of the application you wish to build. The build artifacts will be stored in the `dist/` directory. Use the `--prod` flag for a production build.
 
 ## Running unit tests
 
-Run `nx test my-app` to execute the unit tests via [Jest](https://jestjs.io).
+Run `nx test api` to execute the unit tests via [Jest](https://jestjs.io).
 
 Run `nx affected:test` to execute the unit tests affected by a change.
 

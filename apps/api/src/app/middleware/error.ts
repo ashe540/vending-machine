@@ -1,4 +1,5 @@
 import { ErrorRequestHandler } from 'express';
+import { config } from '../utils/config';
 
 export const error: ErrorRequestHandler = (err, req, res, next) => {
   if (res.headersSent) return next(err);
@@ -12,8 +13,10 @@ export const error: ErrorRequestHandler = (err, req, res, next) => {
     // eslint-disable-next-line
     console.error(JSON.stringify(err.meta.body, null, 2));
   } else {
-    // eslint-disable-next-line
-    console.error(err);
+    if (config.env !== 'test') {
+      // eslint-disable-next-line
+      console.error(err);
+    }
   }
 
   // Handle Boom Errors

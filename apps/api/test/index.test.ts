@@ -1,30 +1,44 @@
-import supertest from 'supertest';
+import request from 'supertest';
 import { app } from '../src/main';
-import { demoCreateProduct, demoProduct } from './global-const';
+import { loginUser } from './auth.test';
+import {
+  API_URL,
+  BUYER_AUTH,
+  demoCreateProduct,
+  demoProduct,
+  SELLER_AUTH,
+} from './global-const';
+import { AuthTest } from './interfaces';
 
-const requestWithSupertest = supertest(app);
-
-const API_URL = '/api/v1';
-const BUYER_AUTH = 'buyer';
-const SELLER_AUTH = 'seller';
-
-const auth: any = {
+const auth: AuthTest = {
   buyerToken: '',
   sellerToken: '',
 };
 let productId;
 
-beforeAll(loginUser);
+beforeAll(async () => {
+  const buyerAuth = await loginUser(API_URL, {
+    username: BUYER_AUTH,
+    password: BUYER_AUTH,
+  });
+  const sellerAuth = await loginUser(API_URL, {
+    username: SELLER_AUTH,
+    password: SELLER_AUTH,
+  });
 
-describe('Product endpoints', () => {
+  auth.buyerToken = buyerAuth.body.token;
+  auth.sellerToken = sellerAuth.body.token;
+});
+
+describe.skip('Product endpoints', () => {
   it('GET /products should show all products', async () => {
-    const res = await requestWithSupertest.get(`${API_URL}/products`);
+    const res = await request(app).get(`${API_URL}/products`);
     expect(res.status).toEqual(200);
     expect(res.type).toEqual(expect.stringContaining('json'));
   });
 
   it('POST /products should require authentication', async () => {
-    const res = await requestWithSupertest
+    const res = await request(app)
       .post(`${API_URL}/products`)
       .send(demoProduct);
 
@@ -32,7 +46,7 @@ describe('Product endpoints', () => {
   });
 
   it('POST /products should create a new product', async () => {
-    const res = await requestWithSupertest
+    const res = await request(app)
       .post(`${API_URL}/products`)
       .set({ Authorization: `Bearer ${auth.sellerToken}` })
       .send(demoCreateProduct);
@@ -44,49 +58,16 @@ describe('Product endpoints', () => {
   });
 
   it('DELETE /products/:id should require authentication', async () => {
-    const res = await requestWithSupertest.delete(
-      `${API_URL}/products/${productId}`
-    );
+    const res = await request(app).delete(`${API_URL}/products/${productId}`);
 
     expect(res.statusCode).toEqual(401);
   });
 
   it('DELETE /products/:id should delete the product', async () => {
-    const res = await requestWithSupertest
+    const res = await request(app)
       .delete(`${API_URL}/products/${productId}`)
       .set({ Authorization: `Bearer ${auth.sellerToken}` });
     expect(res.statusCode).toEqual(200);
     expect(res.body).toHaveProperty('message');
   });
 });
-
-// afterAll(async () => {
-// await requestWithSupertest.post(`${API_URL}/products`)
-// })
-
-async function loginUser(): Promise<void> {
-  const buyerAuth = await requestWithSupertest
-    .post(`${API_URL}/users/login`)
-    .send({
-      username: BUYER_AUTH,
-      password: BUYER_AUTH,
-    });
-
-  expect(buyerAuth.status).toEqual(200);
-  expect(buyerAuth.type).toEqual(expect.stringContaining('json'));
-  expect(buyerAuth.body).toHaveProperty('token');
-
-  const sellerAuth = await requestWithSupertest
-    .post(`${API_URL}/users/login`)
-    .send({
-      username: SELLER_AUTH,
-      password: SELLER_AUTH,
-    });
-
-  expect(sellerAuth.status).toEqual(200);
-  expect(sellerAuth.type).toEqual(expect.stringContaining('json'));
-  expect(sellerAuth.body).toHaveProperty('token');
-
-  auth.buyerToken = buyerAuth.body.token;
-  auth.sellerToken = sellerAuth.body.token;
-}

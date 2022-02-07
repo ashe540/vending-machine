@@ -127,11 +127,11 @@ export const buyMultiple: RequestHandler = async (req, res) => {
   const availableBalance = userObj.deposit;
 
   if (availableBalance < totalCost) {
-    throw Boom.notAcceptable(
-      `You do not have enough balance to make the purchase. Please deposit ${
+    return res.json({
+      message: `You do not have enough balance to make the purchase. Please deposit ${
         totalCost - availableBalance
-      } cents to your account and try again`
-    );
+      } cents to your account and try again`,
+    });
   }
 
   try {
