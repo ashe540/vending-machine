@@ -4,6 +4,8 @@ A project (Angular + Node.js) that allows interacting with a vending machine.
 
 <p style="text-align: center;"><img src="https://cdna.artstation.com/p/assets/images/images/030/203/116/4k/jonjo-hemmens-01-darker.jpg" ></p>
 
+<span>Credit to Jonjo Hemmens for the image (<a href="https://www.artstation.com/artwork/5Xdwbz" target="_blank">Art Station</a>)</span>
+
 ## Applications
 
 This project was generated using [Nx](https://nx.dev). All applications are under the `apps` directory. This monorepo is made up of:
